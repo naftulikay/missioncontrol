@@ -1,0 +1,5 @@
+---
+- name: build
+  hosts: all
+  roles:
+    - role: vagrant-docker
