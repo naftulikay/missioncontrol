@@ -2,11 +2,17 @@
 dist: trusty
 sudo: false
 
-language: python
-python: 3.6
-cache: pip
+language: minimal
 
-script: make test
+script:
+  - docker-compose up --build -d
+  - docker cp ./goss.yml missioncontrol:/goss.yml
+  # install goss
+  - docker exec -i missioncontrol bash -lc 'curl -fsSL https://goss.rocks/install | sh'
+  # wait for coredns to start
+  - docker exec -i missioncontrol bash -lc 'while ! pgrep coredns >/dev/null ; do sleep 5 ; done'
+  # execute goss tests
+  - docker exec -i missioncontrol goss --gossfile /goss.yml validate
 
 notifications:
   email:

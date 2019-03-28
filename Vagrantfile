@@ -17,6 +17,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # using a specific IP.
   config.vm.network "private_network", type: "dhcp"
 
+  config.ssh.forward_agent = true
+
   # Tweak the VMs configuration.
   config.vm.provider "virtualbox" do |vb|
     vb.cpus = Etc.nprocessors

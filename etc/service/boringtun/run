@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+exec /usr/local/sbin/boringtun --foreground wgnet0
