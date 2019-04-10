@@ -1,0 +1,36 @@
+---
+dns:
+  google.com:
+    resolvable: true
+    server: 127.0.0.1
+    timeout: 1000
+
+command:
+  # SANITY: we should have the ability to query cloudflare over TLS directly
+  'kdig -d @1.1.1.1 +tls-ca +tls-host=cloudflare-dns.com google.com':
+    exit-status: 0
+
+package:
+  curl: { installed: true }
+  dnsutils: { installed: true }
+  gnupg: { installed: true }
+  knot-dnsutils: { installed: true }
+  less: { installed: true }
+  mosh: { installed: true }
+  neovim: { installed: true }
+  net-tools: { installed: true }
+  nmap: { installed: true }
+  openssh-server: { installed: true }
+  openssh-client: { installed: true }
+  psmisc: { installed: true }
+  runit: { installed: true }
+  sudo: { installed: true }
+  traceroute: { installed: true }
+  tree: { installed: true }
+  tmux: { installed: true }
+
+process:
+  coredns:
+    running: true
+  sshd:
+    running: true

@@ -3,3 +3,4 @@
   hosts: all
   roles:
     - role: vagrant-docker
+      become: true

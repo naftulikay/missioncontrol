@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+source /usr/lib/bash/functions.sh
+
+exec /usr/bin/coredns -quiet -conf /etc/coredns/Corefile

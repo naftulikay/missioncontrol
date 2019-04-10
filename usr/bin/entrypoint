@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function .log() {
+  echo $@ >&2
+}
+
+find /etc/boot.d/ -type f -executable | sort -u | while read boot_script ; do
+  .log "Executing boot script ${boot_script}..."
+  ${boot_script}
+done
+
+# self destruct
+rm -f "$0"
+
+if [ "$#" -gt 0 ]; then
+  .log "Executing command line: $@..."
+  exec $@
+else
+  .log "Starting runit..."
+  exec /usr/bin/runsvdir /etc/service
+fi
